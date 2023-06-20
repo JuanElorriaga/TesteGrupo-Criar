@@ -1,30 +1,49 @@
+<?php
+include 'pilotos.php'
+?>
+
 <!DOCTYPE html>
-<html lang="pt-br">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto Criar</title>
+    <title>Resultado da Corrida</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body class="corpo">
-   <header class="header">
-    <nav class="nav">
-    <ul class="menu">
-            <li> <img src="formula-1-logo-7.png" alt="logo"class="logo"></li>
-            <li><a href="#corredores">Corredores</a></li>
-            <li> <a href="#tempo">Tempo</a></li>
-            <li> <a href="#Melhor">Melhor Volta de cada piloto</a></li>
-        </ul>
+<body>
+    <h1>Resultado da Corrida</h1>
     <nav>
-   </header> 
-    <main>
-        <div>
-            <p> A corrida mais incrível está para começar, descubra quem foi o campeão:</p>
-            <?php include './pitolos.php'?>
- 
-        </main>
-    <footer>
+        <img src="formula-1-logo-7.png" alt="logo" class="logo">
+    </nav>
+    <section>
+    <table>
+        <tr>
+            <th>Posição</th>
+            <th>Chegada</th>
+            <th>Código</th>
+            <th>Nome do Piloto</th>
+            <th>Quantidade de Voltas Completadas</th>
+            <th>Tempo Total de Prova</th>
+        </tr>
+        <?php
+        $position = 1;
+        foreach ($raceResults as $code => $result) {
+            $name = $result['name'];
+            $laps = $result['laps'];
+            $totalTime = formatTime($result['totalTime']);
+            $arrivalTime = formatTime($result['totalTime'] - $raceResults[0]['totalTime']);
 
-    </footer>
+            echo "<tr>";
+            echo "<td>" . $position . "</td>";
+            echo "<td>" . $arrivalTime . "</td>";
+            echo "<td>" . $code . "</td>";
+            echo "<td>" . $name . "</td>";
+            echo "<td>" . $laps . "</td>";
+            echo "<td>" . $totalTime . "</td>";
+            echo "</tr>";
+
+            $position++;
+        }
+        ?>
+    </table>
+    </section>
 </body>
-</html>
+</html>}
